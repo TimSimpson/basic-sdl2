@@ -107,35 +107,14 @@ class BasicSdl(conans.ConanFile):
         else:
             # ensure that SDL2main is linked first
             sdl2mainlib = "SDL2main"
+            # BinCrafter's does the following. Maybe I'm not building this
+            # thing correctly?
             # if self.settings.build_type == "Debug":
             #     sdl2mainlib = "SDL2maind"
             self.cpp_info.libs.insert(0, self.cpp_info.libs.pop(self.cpp_info.libs.index(sdl2mainlib)))
         self.cpp_info.includedirs.append(os.path.join("include", "SDL2"))
-        # if self.settings.os == "Linux":
-        #     self.cpp_info.system_libs.extend(["dl", "rt", "pthread"])
-        #     if self.options.jack:
-        #         self._add_libraries_from_pc("jack")
-        #     if self.options.sndio:
-        #         self._add_libraries_from_pc("sndio")
-        #     if self.options.nas:
-        #         self.cpp_info.libs.append("audio")
-        #     if self.options.esd:
-        #         self._add_libraries_from_pc("esound")
-        #     if self.options.directfb:
-        #         self._add_libraries_from_pc("directfb")
-        #     if self.options.video_rpi:
-        #         self.cpp_info.libs.append("bcm_host")
-        #         self.cpp_info.includedirs.extend(["/opt/vc/include",
-        #                                           "/opt/vc/include/interface/vcos/pthreads",
-        #                                           "/opt/vc/include/interface/vmcs_host/linux"])
-        #         self.cpp_info.libdirs.append("/opt/vc/lib")
-        #         self.cpp_info.sharedlinkflags.append("-Wl,-rpath,/opt/vc/lib")
-        #         self.cpp_info.exelinkflags.append("-Wl,-rpath,/opt/vc/lib")
-        # elif self.settings.os == "Macos":
-        #     self.cpp_info.frameworks.extend(["Cocoa", "Carbon", "IOKit", "CoreVideo", "CoreAudio", "AudioToolbox", "ForceFeedback"])
-        # elif self.settings.os == "Windows":
-        #     self.cpp_info.system_libs.extend(["user32", "gdi32", "winmm", "imm32", "ole32", "oleaut32", "version", "uuid", "advapi32", "setupapi", "shell32"])
-        #     if self.settings.compiler == "gcc":
-        #         self.cpp_info.system_libs.append("mingw32")
+
+        # Bincrafter's version establishes a million library dependencies here.
+
         self.cpp_info.names["cmake_find_package"] = "SDL2"
         self.cpp_info.names["cmake_find_package_multi"] = "SDL2"
