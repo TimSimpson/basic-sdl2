@@ -29,8 +29,8 @@ class GzipDownloader:
             except BaseException:
                 os.remove(gzip_path)
 
-        tools.download(url, gzip_name)
-        tools.check_md5(gzip_path, md5_sum)
+        tools.download(self._url, gzip_path)
+        tools.check_md5(gzip_path, self._md5_sum)
         return gzip_path
 
     def _clean_extracted_directory(self, folder):
@@ -46,7 +46,7 @@ class GzipDownloader:
 
 class BasicSdl(conans.ConanFile):
     name = "basic-sdl"
-    version = "0.1.0"
+    version = "2.0.8"
     license = ""
     author = ""
     description = "A basic version of the SDL2 libraries"
@@ -54,6 +54,17 @@ class BasicSdl(conans.ConanFile):
     settings = "os", "compiler", "build_type", "arch"
 
     requires = tuple()
+
+    options = {
+        "shared": [True, False],
+        "sdl2main": [True, False],
+    }
+    default_options = {
+        "shared": False,
+        # Emulating what Bincrafters choose, probably by user's requests.
+        # I wish I knew why anyone in their right mind would want this.
+        "sdl2main": True
+    }
 
     _gzip_downloader = GzipDownloader(
         base_name='SDL2-2.0.8',
@@ -96,8 +107,8 @@ class BasicSdl(conans.ConanFile):
         else:
             # ensure that SDL2main is linked first
             sdl2mainlib = "SDL2main"
-            if self.settings.build_type == "Debug":
-                sdl2mainlib = "SDL2maind"
+            # if self.settings.build_type == "Debug":
+            #     sdl2mainlib = "SDL2maind"
             self.cpp_info.libs.insert(0, self.cpp_info.libs.pop(self.cpp_info.libs.index(sdl2mainlib)))
         self.cpp_info.includedirs.append(os.path.join("include", "SDL2"))
         # if self.settings.os == "Linux":
