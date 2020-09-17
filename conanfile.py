@@ -45,8 +45,8 @@ class GzipDownloader:
 
 
 class BasicSdl(conans.ConanFile):
-    name = "basic-sdl"
-    version = "2.0.8"
+    name = "basic-sdl2"
+    version = "2.0.9"
     license = ""
     author = ""
     description = "A basic version of the SDL2 libraries"
@@ -67,9 +67,9 @@ class BasicSdl(conans.ConanFile):
     }
 
     _gzip_downloader = GzipDownloader(
-        base_name='SDL2-2.0.8',
-        url="https://www.libsdl.org/release/SDL2-2.0.8.tar.gz",
-        md5_sum="3800d705cef742c6a634f202c37f263f"
+        base_name='SDL2-2.0.9',
+        url="https://www.libsdl.org/release/SDL2-2.0.9.tar.gz",
+        md5_sum="f2ecfba915c54f7200f504d8b48a5dfe"
     )
 
     def source(self):
