@@ -13,7 +13,7 @@ As of today, the libraries end up being built as shared, even if this is disable
 
 ## Version Number
 
-The version number matches BinCrafter's and the actual SDL2 except it's prefixed with a `b`. So SDL2 2.0.9 is `b2.0.9`.
+The version number matches BinCrafter's and the actual SDL2 except it's prefixed with a `b_`. So SDL2 2.0.9 is `b_2.0.9`.
 
 
 ## Motivation
@@ -22,7 +22,7 @@ The BinCrafter's SDL2 packages are excellent, but they involve some complexity. 
 
 I don't want to get into an argument about whether or not Conan / BinCrafter's decision to do things a certain way is _correct_, as history has shown me it usually is. In fact I'd recommend in most cases just using the BinCrafter's packages and moving on.
 
-But, if they're giving you hell, you can always try these.
+But, if it's being a hurdle in some esoteric situation, you can always try this.
 
 ## How it works
 
