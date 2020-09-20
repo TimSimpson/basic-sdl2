@@ -34,4 +34,4 @@ I've got plans to eventually make the recipe download the prebuilt Windows binar
 
 This tries to mimic the BinCrafters packages where possible, but of course by it's nature there are limits. If you build a package which depends on this, then every package which depends on your package will try to use this goofy version of SDL2 instead of the BinCrafter's ones. I don't recommend that.
 
-Instead, add an option which will make your package rely on `basic-sdl2` instead of Bincrafter's SDL2. Then, in certain situations, you can set this option in your build profile to bypass building the Bincrafter's SDL2 packages and all of its dependencies if it turns out to be an hassle.
+Instead, add an option which will make your package rely on `basic-sdl2` instead of Bincrafter's SDL2 (see [here](https://docs.conan.io/en/latest/using_packages/conanfile_txt.html#overriding-requirements) for how to do that). Then, in certain situations, you can set this option in your build profile to bypass building the Bincrafter's SDL2 packages and all of its dependencies if it turns out to be an hassle.
