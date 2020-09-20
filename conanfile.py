@@ -46,7 +46,7 @@ class GzipDownloader:
 
 class BasicSdl(conans.ConanFile):
     name = "basic-sdl2"
-    version = "2.0.9"
+    version = "b_2.0.9"
     license = ""
     author = ""
     description = "A basic version of the SDL2 libraries"
@@ -55,15 +55,57 @@ class BasicSdl(conans.ConanFile):
 
     requires = tuple()
 
+    # Copied from BinCrafters
     options = {
-        "shared": [True, False],
+        "alsa": [True, False],
+        "arts": [True, False],
+        "directfb": [True, False],
+        "directx": [True, False],
+        "esd": [True, False],
+        "fPIC": [True, False],
+        "iconv": [True, False],
+        "jack": [True, False],
+        "mir": [True, False],
+        "nas": [True, False],
+        "pulse": [True, False],
         "sdl2main": [True, False],
+        "shared": [True, False],
+        "video_rpi": [True, False],
+        "wayland": [True, False],
+        "x11": [True, False],
+        "xcursor": [True, False],
+        "xinerama": [True, False],
+        "xinput": [True, False],
+        "xrandr": [True, False],
+        "xscrnsaver": [True, False],
+        "xshape": [True, False],
+        "xvm": [True, False],
     }
+
     default_options = {
+        "alsa": True,
+        "arts": False,
+        "directfb": False,
+        "directx": True,
+        "esd": False,
+        "fPIC": True,
+        "iconv": False,
+        "jack": True,
+        "mir": False,
+        "nas": True,
+        "pulse": True,
+        "sdl2main": True,
         "shared": False,
-        # Emulating what Bincrafters choose, probably by user's requests.
-        # I wish I knew why anyone in their right mind would want this.
-        "sdl2main": True
+        "video_rpi": False,
+        "wayland": False,
+        "x11": True,
+        "xcursor": True,
+        "xinerama": True,
+        "xinput": True,
+        "xrandr": True,
+        "xscrnsaver": True,
+        "xshape": True,
+        "xvm": True,
     }
 
     _gzip_downloader = GzipDownloader(
