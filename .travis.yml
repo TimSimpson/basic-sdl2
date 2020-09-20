@@ -1,0 +1,64 @@
+language: cpp
+
+clang-linux: &clang-linux
+  os: linux
+  dist: bionic
+  python: "3.7"
+  compiler: clang
+  addons:
+    apt:
+      sources:
+        - ubuntu-toolchain-r-test
+        - llvm-toolchain-bionic-8
+      packages:
+        - clang-8
+        - libstdc++-8-dev
+        - python3-pip
+
+emscripten: &emscripten
+  os: linux
+  dist: bionic
+  python: "3.7"
+  compiler: clang
+  addons:
+    apt:
+      packages:
+        - python3-pip
+
+osx: &osx
+   os: osx
+   language: generic
+   osx_image: xcode11.3
+
+install:
+  - git clone https://github.com/TimSimpson/ci-land.git ci
+  - pushd ci && git checkout 0d0994ed9803d74a6bc0bc161e34f2d63f6c6230 && popd
+  - ./ci/cpp/conan/travis/install.sh
+
+script:
+  - ./ci/cpp/conan/travis/run.sh
+
+matrix:
+  include:
+
+    - name: "Linux Clang 8.0 Release"
+      <<: *clang-linux
+      env:
+        - PROFILE=clang-8-r-static
+    - name: "Linux Clang 8.0 Debug"
+      <<: *clang-linux
+      env:
+        - PROFILE=clang-8-d-static
+    - name: "Emscripten WASM Release"
+      <<: *clang-linux
+      env:
+        - PROFILE=emscripten-w-r
+    - name: "Emscripten Javascript Debug"
+      <<: *clang-linux
+      env:
+        - PROFILE=emscripten-js-d
+env:
+  global:
+    - CIL_RUN_CALL_SOURCE=true
+    - CONAN_LOGIN_USERNAME=TimSimpson
+    - secure: FThi6yAzung+fGW/pW+m2TQNK4Qj1LrQSqO5cl1wNPQpSYa3pavhRn2vOlvWZH09nOzOB4o4h59KfXa1pbgNCHrERCHuD6+3h8sHalYZHioH3FKM88uYJXAm52dxD/xPaWGbBlrGPQf5vzGeE7iCq1E6HehBDX5nt4ZjJITXouPqnkzCQLjAcZyZa407jX6WMmvdIBjsXYOaIhmd/okx3TBrafXZhopCIEzTpPm/bUFUYF3PHspHNoodnNOxpBb4PI60pB2YHGeSWozx8C7C2eQuvPpCjhSxc09wAConeCyfCF/u+5rmeGmBl4s6SjYzNUfcZk97433bMPMbWtL7bbr4NweQd8iaKLth2F2HLV05aU7fbbIR+yiSrKm4QT+OtYAsIF5loVMFO1GLgbA1u9ZvpdFlmZH3R1usgHDOZ6SjypcpL1IRmaKo2LFDm/wNfwdb3h2GseA5yo3agITGKeMTTg+t2YVeoFdykTZBm0rr0hOUEYBS0K/QLd9K/27za2VyFUEDn3Cg5TL4RjBLTBgCI3RKE4RBuaryfGY2RMLKV+LOREUnLfO1ksa1Z4Jh8Kt6YXs0Jx0AGyrx3VvXWcy/iHIwXrvucb00PXqdkVXBFPG+0Da/fnMCp4zqa32JKv4oOdbMAMdzCZqEXlA9RlBclSlsK86bJlHLEBNlYtE=
