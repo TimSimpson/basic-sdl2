@@ -7,7 +7,7 @@ class TestPackage(conans.ConanFile):
     settings = "os", "compiler", "build_type", "arch"
 
     requires = (
-         "basic-sdl2/2.0.9@TimSimpson/testing"
+         "sdl2/2.0.9@TimSimpson/testing"
     )
 
     def build(self):

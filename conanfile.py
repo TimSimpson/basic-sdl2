@@ -45,7 +45,7 @@ class GzipDownloader:
 
 
 class BasicSdl(conans.ConanFile):
-    name = "basic-sdl2"
+    name = "sdl2"
     version = "b_2.0.9"
     license = ""
     author = ""
